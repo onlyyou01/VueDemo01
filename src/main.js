@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import store from './store'
 import 'styles/reset.css'
 // 1像素边框
 import 'styles/border.css'
@@ -17,7 +18,8 @@ Vue.use(VueAwesomeSwiper /* { default global options } */)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
+	router,
+	store,
   // 局部组件App
   components: { App },
   template: '<App/>'

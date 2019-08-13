@@ -1,67 +1,56 @@
 <template>
 <div class="icons">
-	<div class="icon">
+<swiper :options="swiperOption" >
+  <swiper-slide v-for="(page,index) of pages" :key="index">
+	<div class="icon" v-for="item of page" :key="item.id">
 		<div class='icon-img'>
-			<img class='icon-imgcontent' src='http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png'/>
+			<img class='icon-imgcontent' :src='item.imgUrl'/>
 		</div>
-		<p class="icon-desc">热门景点</p>
+		<p class="icon-desc">{{item.desc}}</p>
 	</div>
-	<div class="icon">
-		<div class='icon-img'>
-			<img class='icon-imgcontent' src='http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png'/>
-		</div>
-		<p class="icon-desc">热门景点</p>
-	</div>
-	<div class="icon">
-		<div class='icon-img'>
-			<img class='icon-imgcontent' src='http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png'/>
-		</div>
-		<p class="icon-desc">热门景点</p>
-	</div>
-	<div class="icon">
-		<div class='icon-img'>
-			<img class='icon-imgcontent' src='http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png'/>
-		</div>
-		<p class="icon-desc">热门景点</p>
-	</div>
-	<div class="icon">
-		<div class='icon-img'>
-			<img class='icon-imgcontent' src='http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png'/>
-		</div>
-		<p class="icon-desc">热门景点</p>
-	</div>
-	<div class="icon">
-		<div class='icon-img'>
-			<img class='icon-imgcontent' src='http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png'/>
-		</div>
-		<p class="icon-desc">热门景点</p>
-	</div>
-	<div class="icon">
-		<div class='icon-img'>
-			<img class='icon-imgcontent' src='http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png'/>
-		</div>
-		<p class="icon-desc">热门景点</p>
-	</div>
-	<div class="icon">
-		<div class='icon-img'>
-			<img class='icon-imgcontent' src='http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png'/>
-		</div>
-		<p class="icon-desc">热门景点</p>
-	</div>
+  </swiper-slide>
+</swiper>
+
 </div>
 </template>
 
 <script>
 export default {
-name: 'HomeIcons'
+name: 'HomeIcons',
+props: {
+	list: Array
+},
+data () {
+	return {
+		swiperOption: {
+			autoplay: false
+		}
+	}
+},
+computed: {
+	pages () {
+		const pages = []
+		this.list.forEach((item, index) => {
+			const page = Math.floor(index / 8)
+			if (!pages[page]) {
+				pages[page] = []
+			}
+			pages[page].push(item)
+		})
+		return pages
+	}
+}
+
 }
 </script>
 <style lang="stylus" scoped>
 	@import '~styles/varibles.styl'
-	.icons
-		overflow: hidden
+	@import '~styles/mixins.styl'
+	.icons >>> .swiper-container
 		height: 0
 		padding-bottom: 50%
+	.icons
+		margin-top :.1rem
 		.icon
 			position :relative
 			overflow :hidden
@@ -90,4 +79,5 @@ name: 'HomeIcons'
 				line-height: .44rem
 				text-align:center
 				color :$darkTextColor
+				ellipsis()
 </style>
