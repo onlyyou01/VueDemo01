@@ -25,9 +25,9 @@
     background: $bgColor
     .back-icon
       position absolute
-      top: 0;
+      top: 0
       left: 0
-      width: .6rem
+      width: .64rem
       font-size .36rem
       color: #fff
 </style>
